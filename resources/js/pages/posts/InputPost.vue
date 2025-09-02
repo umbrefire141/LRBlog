@@ -1,10 +1,12 @@
 <template>
 	<Layout>
-		<form class="form" @submit.prevent>
+		<form class="form" @submit.prevent="sendData">
 			<FileUpload :file="file" @getFile="getFile" />
-			<Input v-model="title" name="title" placeholder="Title" type="text" />
-			<Textarea v-model="content" placeholder="Content" />
-			<Button class="btn" @click="sendData">Create</Button>
+			<Input v-model="form.title" name="title" placeholder="Title" type="text" />
+			<div class="error" v-if="form.errors.title">{{ form.errors.title }}</div>
+			<Textarea v-model="form.content" placeholder="Content" />
+			<div class="error" v-if="form.errors.content">{{ form.errors.content }}</div>
+			<Button type="submit" class="btn">Create</Button>
 		</form>
 	</Layout>
 </template>
@@ -14,11 +16,15 @@ import FileUpload from '@/components/FileUpload.vue'
 import Input from '@/components/Input.vue'
 import Textarea from '@/components/Textarea.vue'
 import Layout from '@/layouts/Layout.vue'
+import { useForm } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
 const file = ref<File | null>()
-const title = ref<string>('')
-const content = ref<string>('')
+
+const form = useForm({
+	title: '',
+	content: ''
+})
 
 
 const getFile = (afile: File) => {
@@ -26,17 +32,19 @@ const getFile = (afile: File) => {
 }
 
 const sendData = () => {
-	console.log(file.value)
-	console.log(title.value)
-	console.log(content.value)
 
 }
-
 
 </script>
 <style scoped>
 .btn {
 	width: 100%;
+	margin-top: 1.5rem;
+}
+
+.error {
+	color: #ff3333;
+	font-weight: 600;
 	margin-top: 1.5rem;
 }
 </style>

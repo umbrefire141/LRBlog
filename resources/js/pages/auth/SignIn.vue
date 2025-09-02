@@ -5,6 +5,7 @@
 			<form class="form" @submit.prevent="login">
 				<Input v-model="form.email" name="email" placeholder="Email" type="email" />
 				<Input v-model="form.password" name="password" placeholder="Password" type="password" />
+				<div class="error" v-if="form.errors.email || form.errors.password">Wrong email or password</div>
 				<Button class="btn" type="submit">Sign In</Button>
 			</form>
 			<Link href="/auth/sign-up">Don't you have an account? Sign up</Link>
@@ -45,6 +46,12 @@ const login = () => {
 
 .btn {
 	width: 100%;
+	margin-top: 1.5rem;
+}
+
+.error {
+	color: #ff3333;
+	font-weight: 600;
 	margin-top: 1.5rem;
 }
 </style>

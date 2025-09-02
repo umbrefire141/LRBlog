@@ -7,12 +7,9 @@
 					alt="Title">
 			</div>
 			<div class="content">
-				<h3 class="title">Hi world</h3>
+				<h3 class="title">{{ props.user?.name }}</h3>
 				<div class="text">
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At earum illum placeat reprehenderit hic molestiae
-						laborum obcaecati quibusdam quos aut?</p>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. At earum illum placeat reprehenderit hic molestiae
-						laborum obcaecati quibusdam quos aut?</p>
+					{{ props.user?.email }}
 				</div>
 			</div>
 			<div class="btns">
@@ -25,6 +22,19 @@
 <script setup lang="ts">
 import Button from '@/components/Button.vue'
 import Layout from '@/layouts/Layout.vue'
+import { PropType } from 'vue'
+
+interface IUser {
+	id: number
+	email: string
+	name: string
+}
+
+const props = defineProps({
+	user: {
+		type: Object as PropType<IUser>
+	}
+})
 </script>
 <style scoped>
 .user {

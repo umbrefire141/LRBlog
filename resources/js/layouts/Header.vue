@@ -13,9 +13,13 @@
 						</li>
 					</ul>
 					<div class="btns">
-						<Link href="/auth/sign-in">
+						<Link href="/auth/sign-in" v-if="!$page.props.auth.user">
 						<Button>Войти</Button>
 						</Link>
+						<Link v-bind:href="`/users/${$page.props.auth.user.id}`" v-if="$page.props.auth.user">
+						<Button>Profile</Button>
+						</Link>
+						<Button v-if="$page.props.auth.user">Logout</Button>
 					</div>
 				</div>
 			</nav>
@@ -52,5 +56,10 @@ import { Link } from '@inertiajs/vue3'
 	align-items: center;
 	gap: 1rem;
 	margin-right: 1rem;
+}
+
+.btns {
+	display: flex;
+	gap: 0.5rem;
 }
 </style>
